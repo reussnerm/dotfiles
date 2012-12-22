@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+getRealName ()
+{
+	REALNAME=$(echo $1|cut -d '@' -f1)
+}
+
+getIcon ()
+{
+	
+	#echo "$1"
+	case "$1" in
+		"O") ICON="online.png"
+			;;
+		"F") ICON="chat.png"
+			;;
+		"A") ICON="away.png"
+			;;
+		"N") ICON="xa.png"
+			;;
+		"D") ICON="dnd.png"
+			;;
+		"I") ICON="invisible.png"
+			;;
+		"_") ICON="offline.png"
+			;;
+		"?") ICON="error.png"
+			;;
+		"X") ICON="requested.png"
+			;;
+		*) ICON="online.png"
+			;;
+	esac
+	ICON="${HOME}/.config/awesome/naughtyicons/${ICON}"
+}
+
+logNotification()
+{
+	echo "$(date '+%s'):$KIND:$JID:$STATUS" >> ~/.mcabber/status.log
+}

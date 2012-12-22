@@ -1,0 +1,107 @@
+alternative_order text/plain text/html
+auto_view application/pdf												# view pdfs automatically
+auto_view text/html														# view html automatically
+bind index \CO sidebar-open
+bind index gg          first-entry
+bind index G           last-entry
+bind index J           next-unread
+bind index K           previous-unread
+bind index,pager R     group-reply
+bind pager \CO sidebar-open
+bind pager <down>      next-line
+bind pager f			forward-message
+bind pager G           bottom
+bind pager gg          top
+bind pager h 			display-toggle-weed								#toggle headers with h key
+bind pager j           next-line
+bind pager J           next-undeleted
+bind pager k           previous-line
+bind pager K           previous-undeleted
+bind pager /           search
+bind pager <up>        previous-line
+color sidebar_new  red default
+
+hdr_order		From: To: cc: Subject: Date: Reply-To: 
+ignore *                                                # ignore all headers
+macro generic "\e?" 	"<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
+macro index "A"			"all" 		"Show all messages"
+macro index b 			"toggle sidebar_visible"
+macro index "\Cb"		"<pipe-message>urlview<enter>"					# URL viewer.
+macro index c 			"<change-folder>?" "open a different folder"
+macro index "\'"     	"<clear-flag>r"									# Mark as un-replied
+macro index "\Cx\Cb" "<change-folder>?"                                   # Folder list.
+macro index D "<save-message>+trash<enter>"	"move message to the trash"
+macro index "\ea"		"<change-folder>=archives/<tab><tab>"			# List archives
+macro index "\eb"		"<pipe-message>lbdb-fetchaddr<enter>"			# Store address details in lbdb.
+macro index E			"<change-folder>+Eurobot<enter>"   "go to Inbox"
+macro index "\eh"    	"<pipe-message>mailhops<enter>"					# View the path of the mail.
+macro index "\ev"    	"<pipe-message>less<enter>"						# View the message in less.
+macro index p 			"<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+macro index I   		"<change-folder>!<enter>"   "go to Inbox"
+macro index S 			"<save-message>+spam<enter>"    "mark message as spam"
+macro index "y"			"<sync-mailbox><change-folder>?<toggle-mailboxes>"   # "-y" screen
+macro pager "\Cb"		"<pipe-message>urlview<enter>"					# URL viewer.
+macro pager "\Cx\Cb" "<change-folder>?"                                   # Folder list.
+macro pager "\eh"    "<pipe-message>mailhops<enter>"					# View the path of the mail.
+macro pager p "<display-toggle-weed> <print-message> <display-toggle-weed>"
+set delete																# don't ask, just do
+set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
+set envelope_from=yes
+set fast_reply="yes"													# Initial prompt for recipient and subject bypassed on reply
+set fcc_attach															# forward attachments
+set folder=~/Maildir/matthieu_at_reussner_dot_ch/						# root folder
+set forward_format="[Fwd] %s (from: %a)"								# format for subject when forwarding
+set forward_quote														# include message in forwards
+set from= "matthieu@reussner.ch"										# who am i?
+set include																# include message in replies
+set mail_check= 0														# check for mail always
+set mbox_type=Maildir 													# mailbox type
+set menu_scroll															# scroll in menus 
+set pager_context= 5													# show five lines when skipping in pager
+set pager_index_lines = 8 												# show 8 messages when in pager
+set pager_format="%-10.10i %[!%a %b %d %R]"
+set pager_stop=no
+#set pager_stop															# don't go to next message automatically
+set print_command=muttprint
+set postponed = "+Drafts"												# [Gmail]/Drafts
+set quit																# don't ask, just do!!
+set realname= "Reussner Matthieu"										# who am i?
+set sendmail = ~/.bin/mymsmtp											# use msmtp 'default' account
+set copy = yes              											# Save copy of outgoing msgs
+#set record = "+Sent Items"
+set sidebar_delim='|'
+set sidebar_visible=no
+set sidebar_width=20
+set smart_wrap															# don't split words
+set sort_aux = reverse-last-date-received
+set sort_re																# thread based on reply_regexp
+set sort= threads 
+set spoolfile = "+INBOX"												# inbox
+
+
+set sig_on_top=yes
+#set status_format=" %r %b %f %n      Del %d      Msgs %m %l %> (%P)"
+set status_format="-%r-+(%v) %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? De l:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]----%>-(%P)---"
+set status_on_top=yes
+set strict_threads														# thread whenever possible 
+
+set signature="~/.mutt/signature"
+
+set query_command="lbdbq '%s'"
+
+source ~/.mutt/gpg.rc
+source ~/.mutt/colors													# colors file 
+source ~/.mutt/mailboxes
+
+unignore from: to: cc: date: subject:									# show only these
+unset confirmappend														# don't ask, just do!
+unset markers															# no ugly plus signs
+unset mark_old															# read/new is good enough for me
+unset mime_forward														# forward attachments as part of body
+#unset record															# required to prevent duplicates in Sent
+unset metoo																# don't reply to me
+
+set print="yes"
+set print_command="muttprint -B"
+set print_split
+set record = "+Sent"

@@ -1,0 +1,49 @@
+[general]
+accounts = HOST1,HOST2
+
+ui = ttyui
+
+[Account riseup]
+localrepository = localHOST1
+remoterepository = remoteHOST1
+
+[Account heigvd]
+localrepository = localHOST2
+remoterepository = remoteHOST2
+
+[Repository localHOST1]
+type = Maildir
+localfolders = ~/Maildir/matthieu_at_reussner_dot_ch
+
+[Repository localHOST2]
+type = Maildir
+localfolders = ~/Maildir/matthieu_dot_reussner_at_HOST2_dot_tld
+
+[Repository remoteHOST1]
+type = IMAP
+ssl = yes
+remotehost = mail.HOST1.tld
+#mail.riseup.net
+remoteuser = matthieu.reussner
+remotepass = passwordHost1
+folderfilter = lambda foldername: not re.search('(Sync Issues|RSS Feeds|Notes|Junk E-Mail|Journal|Deleted Items|Contacts|Calendar)', foldername)
+
+
+[Repository remoteHOST2]
+type = IMAP
+remotehost = imap.HOST2.tld
+remoteuser = matthieu.reussner
+password = passwordHOST2
+ssl = yes
+folderfilter = lambda foldername: not re.search('(Sync Issues|RSS Feeds|Notes|Junk E-Mail|Journal|Deleted Items|Contacts|Calendar)', foldername)
+
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+

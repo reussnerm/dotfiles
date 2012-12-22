@@ -1,0 +1,8 @@
+v0.2 (2009/10/07)
+  - change in update() syntax (see README)
+
+v0.1 (2009/10/03)
+  - first stable version
+
+note : to see complete history, try 'git log'/'gitk' or
+http://gitorious.org/aware/aware/commits/master

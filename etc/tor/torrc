@@ -1,0 +1,16 @@
+#
+# Minimal torrc so tor will work out of the box
+#
+User tor
+PIDFile /var/run/tor/tor.pid
+Log notice syslog
+DataDirectory /var/lib/tor/data
+
+
+VirtualAddrNetwork 10.192.0.0/10
+AutomapHostsOnResolve 1
+TransPort 9040
+DNSPort 53
+
+bridge IP:PORT
+

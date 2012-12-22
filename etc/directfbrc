@@ -1,0 +1,3 @@
+disable-module=linux_input
+mode=1600x900-60
+depth=32

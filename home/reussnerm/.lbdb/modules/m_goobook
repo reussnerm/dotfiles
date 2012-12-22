@@ -1,0 +1,10 @@
+#!/bin/bash
+
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/lbdb
+
+m_goobook_query ()
+{
+	goobook query "$@" | grep -v '^$' | sed -e 's/$/ - goobook/'
+}

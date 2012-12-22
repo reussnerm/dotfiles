@@ -1,0 +1,21 @@
+FSET float(y,m,d) trigger(MAX(realtoday(), date(y,m,d)))
+FSET due(y,m,d) "(" + (date(y,m,d)-trigdate()) + ")"
+REM [trigger(realtoday())] CAL *************Today************* 
+FSET t() iif($Daemon > 0, "%1", "%b %2")
+
+INCLUDE /home/reussnerm/.ical2rem/android
+INCLUDE /home/reussnerm/.ical2rem/birthdays
+INCLUDE /home/reussnerm/.ical2rem/event
+INCLUDE /home/reussnerm/.ical2rem/holiday
+INCLUDE /home/reussnerm/.ical2rem/nasa
+INCLUDE /home/reussnerm/.ical2rem/private
+
+#REM [float(2012,4,20)] MSG File tax return [due(2012,4,20)]
+REM May 4 +10 AT 20:00 +30 MSG %"PBD Report int%" [t()]
+REM Jul 4 2012 AT 12:00 DURATION 1:00 MSG %"Retour en suisse%" [t()]
+REM Oct 29 2012 AT 13:00 DURATION 1:00 MSG %"%" [t()]
+REM Dec 14 2012 AT 16:30 DURATION 2:00 MSG %"Remise de diplome%" [t()]
+REM Dec 18 2012 AT 14:00 DURATION 3:00 MSG %"Convocation séance d'information groupée%" [t()]
+REM Dec 21 2012 AT 10:00 DURATION 1:00 MSG %"Convocation entretien%" [t()]
+REM Feb 25 2013 AT 16:30 DURATION 1:00 MSG %"Convocation entretien ORP%" [t()]
+

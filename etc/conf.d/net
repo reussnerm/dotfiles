@@ -1,0 +1,39 @@
+mode_wlan1="master"
+modules_wlan1=( "!iwconfig !wpa_supplicant" )
+config_wlan1=( "192.168.20.1" )
+channel_wlan1="6"
+essid_wlan1="test"
+
+
+
+
+#ad-hoc
+#modules_wlan0=( "!wpa_supplicant" "!dhcpcd" )
+#mode_wlan0="ad-hoc"
+#essid_wlan0="CRH_balise"
+#channel_wlan0="6"
+#config_wlan0=( "192.168.3.99/24" )
+
+
+modules_wlan0="wpa_supplicant"
+config_wlan0="dhcp"
+metric_wlan0="20"
+
+modules_eth0="ifplugd"
+ifplugd_eth0=""
+config_eth0="dhcp"
+metric_eth0="10"
+dhcp_eth0="norelease nodns nontp nonis nosendhost"
+#-----------------------------------------------------------------------------
+# MAC changer
+mac_eth0="random-full"
+mac_wlan0="random-full"
+#dns_domain_eth0="foo.bar"
+#dns_servers_eth0="192.168.0.2 192.168.0.3"
+#dns_search_eth0="this.domain that.domain"
+#dns_options_eth0="timeout:1 rotate"
+#dns_sortlist_eth0="130.155.160.0/255.255.240.0 130.155.0.0"
+
+
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------

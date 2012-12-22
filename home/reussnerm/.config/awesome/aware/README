@@ -1,0 +1,110 @@
+================================
+aware, a rss reader for awesome
+
+olcc
+================================
+
+aware is a module for awesome wm to read rss feeds and integrate them 
+in the window manager.
+
+http://github.com/olcc/aware
+
+Requirements
+------------
+awesome wm 3.4+ (current devel version)
+(timers syntax changed since 3.3)
+
+Usage
+-----
+Copy aware dir into $XDG_CONFIG_HOME/awesome (awesome config dir).
+Then, add on top of rc.lua :
+
+  require("aware")
+
+You can now add a widget which will display news titles :
+
+  rssbox = {}
+  rssbox = widget({ type = "textbox", name = "rss" })
+  aware.register(rssbox, url_of_feeds, settings)
+
+Note that aware expects a list of urls
+
+example : { "http://news.google.com/news?pz=1&num=25&output=rss" }
+
+*** Settings :
+(name    - type:default -> description)
+
+autodl  - bool:true  -> true enables auto-dl of xml files
+scroll  - bool:false -> true enables scrolling
+tip     - bool:true  -> true enables tooltip on widget
+
+dltime  - float:607  -> intervals between auto-dl
+siz     - int:50     -> desired size of wibox (number of chars ...)
+spacing - int:5      -> spaces between news when scrolling
+speed   - float:1    -> scroll speed (sec/char)
+
+example : { scroll = true, speed = 0.5, siz = 35}
+
+
+Other features
+--------------
+
+WARNING : aware.update() syntax changed recently to cover more
+cases, read below to update your config.
+
+*** aware.update() is a rather useful function.
+In my rc.lua, I added some functions to use with bindings :
+
+--- {{{
+  rs = {}
+  function rs.follow() 
+      local link = aware.link() -- aware.link() returns a link to
+                                -- current info
+      if link then
+	  browse(link)
+      end
+      aware.update("+0+1") -- next info of current feed
+  end
+
+  function rs.origin() 
+      aware.update("=0=0") -- first info of first feed
+  end
+  function rs.next() 
+      aware.update("+0+1") -- next info of current feed
+  end
+  function rs.fnext()
+      aware.update("+1=0") -- first info of next feed
+  end
+-- }}}
+
+where browse(link) spawns a browser tab showing link (define it 
+like you want).
+
+explanations : 
+  update() takes a string of form "sy int sy int" (without spaces ...)
+  first two elements account for feed, others for news.
+  sy can be either '+', '-' or '=' :
+    * + sets the element to current + int
+    * - sets the element to current - int
+    * = sets the element to int
+
+  maybe not very clear ... read the above examples and you should get it.
+
+important :
+  Please keep in mind that calling update does not fetch the xml file 
+  on server, it uses cached values.
+
+To do
+-----
+Many things...
+  - integration with naughty
+  - keeping tracks of rss updates and notifying changes
+  - ...
+
+Authors
+-------
+written by olcc
+
+some useful things inspired by:
+  - vicious (anrxc)
+  - org_awesome (Damien Leone)
